@@ -1,0 +1,5 @@
+protocol	trace	throughput (Mb/s)	95th percentile delay
+sprout	ATT	2.70	147
+sprout	TMobile	
+sprout	Verizon-EVDO
+sprout	Verizon-LTE

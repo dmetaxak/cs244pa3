@@ -45,8 +45,9 @@ int main( int argc, char *argv[] )
   bool debug = false;
   if ( argc == 4 and string( argv[ 3 ] ) == "debug" ) {
     debug = true;
-  } else if ( argc == 3 ) {
+  } else if ( argc == 5 ) {
     /* do nothing */
+    cout << "Using protocol: " << argv[4] << endl;
   } else {
     cerr << "Usage: " << argv[ 0 ] << " HOST PORT [debug]" << endl;
     return EXIT_FAILURE;
