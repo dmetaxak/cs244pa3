@@ -4,6 +4,16 @@ use strict;
 use LWP::UserAgent;
 use HTTP::Request::Common;
 
+my @downlinks = ("ATT-LTE-driving.down", "TMobile-UMTS-driving.down", "Verizon-EVDO-driving.down", "Verizon-LTE-driving.down", "Verizon-LTE-short.down");
+my @uplinks = ("ATT-LTE-driving.up", "TMobile-UMTS-driving.up", "Verizon-EVDO-driving.up", "Verizon-LTE-driving.up", "Verizon-LTE-short.up");
+
+my $linkfile = "";
+foreach $linkfile (@downlinks) {
+    print "filename: $linkfile\n";
+}
+print "done";
+
+
 my $username = $ARGV[ 0 ];
 if ( not defined $username ) {
   die "Usage: $0 USERNAME\n";
@@ -69,3 +79,4 @@ print qq{ done.\n\n};
 #print $response->decoded_content;
 
 print "\n";
+
