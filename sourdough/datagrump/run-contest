@@ -47,6 +47,9 @@ push @command, q{$SPROUT_BT2 $MAHIMAHI_BASE 60001};
 # (datagrump sender's uplink)
 die unless $command[ 3 ] eq "UPLINK";
 $command[ 3 ] = qq{$tracedir/Verizon-LTE-short.down};
+# when there's a loop going through each trace, the above line will look like the below:
+# $command[ 3 ] = qq{$tracedir/$linkfile};
+
 
 die unless $command[ 4 ] eq "DOWNLINK";
 $command[ 4 ] = qq{$tracedir/Verizon-LTE-short.up};
