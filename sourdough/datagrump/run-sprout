@@ -59,11 +59,7 @@ print @command;
 system @command;
 
 # kill the receiver (with a SIGKILL)
-#kill 15, $receiver_pid;
 system "killall -s9 sproutbt2";
-# send a ctrl-c (\x03)
-#send($receiver_pid, "");
-
 
 print "\n";
 
