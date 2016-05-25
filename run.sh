@@ -4,8 +4,8 @@
 
 # run sprout
 
-DOWNLINKS=("ATT-LTE-driving.down" "TMobile-UMTS-driving.down" "Verizon-EVDO-driving.down" "Verizon-LTE-driving.down" "Verizon-LTE-short.down")
-UPLINKS=("ATT-LTE-driving.up" "TMobile-UMTS-driving.up" "Verizon-EVDO-driving.up" "Verizon-LTE-driving.up" "Verizon-LTE-short.up")
+DOWNLINKS=("Verizon-LTE-short.down" "ATT-LTE-driving.down" "TMobile-UMTS-driving.down" "Verizon-EVDO-driving.down" "Verizon-LTE-driving.down" "Verizon-LTE-short.down")
+UPLINKS=("Verizon-LTE-short.up" "ATT-LTE-driving.up" "TMobile-UMTS-driving.up" "Verizon-EVDO-driving.up" "Verizon-LTE-driving.up" "Verizon-LTE-short.up")
 
 for i in `seq 0 4`;
 do
@@ -13,6 +13,7 @@ do
   echo ${DOWNLINKS[$i]}
   echo ${UPLINKS[$i]}
   # now run the protocol
-  echo ./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} $PROTOCOL
-  #./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} $PROTOCOL
+  # echo ./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} $PROTOCOL
+  ./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  #python sourdough/datagrump/run_sprout.py ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 done

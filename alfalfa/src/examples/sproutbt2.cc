@@ -26,8 +26,10 @@ int main( int argc, char *argv[] )
     ip = argv[ 1 ];
     port = atoi( argv[ 2 ] );
 
+    fprintf( stderr, "Making client %s\n", argv[2]);
     net = new Network::SproutConnection( "4h/Td1v//4jkYhqhLGgegw", ip, port );
   } else {
+    fprintf( stderr, "Making server");
     net = new Network::SproutConnection( NULL, NULL );
   }
 
