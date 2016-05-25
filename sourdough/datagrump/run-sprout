@@ -52,6 +52,7 @@ system @command;
 
 # kill the receiver
 kill 'INT', $receiver_pid;
+# kill 'KILL', $receiver_pid;
 
 print "\n";
 

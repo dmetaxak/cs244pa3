@@ -13,6 +13,6 @@ do
   echo ${DOWNLINKS[$i]}
   echo ${UPLINKS[$i]}
   # now run the protocol
-  echo ./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} $PROTOCOL
+  exec ./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} $PROTOCOL
   #./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} $PROTOCOL
 done
