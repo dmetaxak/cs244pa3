@@ -96,7 +96,6 @@ namespace Network {
     int get_tick_length( void ) const { return conn.get_tick_length(); }
 
     int window_size( void );
-    int window_predict( void ) const;
 
     void tick( void );
   };
