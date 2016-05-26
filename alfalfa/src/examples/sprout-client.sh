@@ -13,4 +13,4 @@ sudo tunctl -t tap0
 sudo ifconfig tap0 10.0.0.1 netmask 255.255.255.0 up
 sudo ifconfig tap0 mtu 1420
 sudo route add default gw 10.0.0.2 metric 2 # ensure eth0 is preferred to tap0
-sudo $SPROUT_BT2 $relay_address $relay_port $qdisc eth0 00:19:b9:73:4d:f9
+sudo $SPROUT_BT2 $relay_address $relay_port $qdisc eth0 06:be:22:f3:e1:3d 
