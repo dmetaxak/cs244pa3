@@ -40,9 +40,15 @@ int main( int argc, char *argv[] )
 
   /* first rule: if the socket has data ready (in the "In" direction),
      print it to the screen (cout) */
+  int count = 0;
   poller.add_action( Action( socket, Direction::In,
 			     [&] () {
-			       cout << socket.read();
+				count++;
+				if (count % 10000 == 0) {
+					cout << count << endl;
+				}
+			       string red = socket.read();
+				cout << red << endl;
 
 			       /* exit if the server closes the connection */
 			       if ( socket.eof() ) {
@@ -54,6 +60,22 @@ int main( int argc, char *argv[] )
 
   /* second rule: if the keyboard has data ready (also in the "In" direction),
      write it to the server, plus a carriage return and newline */
+//  int write_count = 0;
+//  int read_count = 0;
+  while (1) {
+    socket.write( "so much data \r\n");
+//    write_count++;
+//    string red = socket.read();
+//    if (red.length() > 0) {
+//      read_count++;
+//    }
+//    if (write_count % 10000 == 0) {
+//    	cout << write_count << endl;
+//    }
+//    if (read_count % 10000 == 0) {
+//    	cout << read_count << endl;
+//    }
+  }
   FileDescriptor keyboard( 0 );
   poller.add_action( Action( keyboard, Direction::In,
 			     [&] () {
@@ -63,9 +85,11 @@ int main( int argc, char *argv[] )
 
   /* run these two rules forever until it's time to quit */
   while ( true ) {
-    const auto ret = poller.poll( -1 );
-    if ( ret.result == PollResult::Exit ) {
-      return ret.exit_status;
-    }
+//    const auto ret = poller.poll( -1 );
+//    cout << "ret: " << ret.exit_status << endl;
+//    if ( ret.result == PollResult::Exit ) {
+//      return ret.exit_status;
+//    }
+	// if socket has data ready for us, read
   }
 }

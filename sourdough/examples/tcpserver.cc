@@ -45,13 +45,18 @@ int main( int argc, char *argv[] )
 
     thread client_handler( [] ( TCPSocket client ) {
 	cerr << "New connection from " << client.peer_address().to_string() << endl;
-
+//	int count = 0;
 	/* Print every line that the client sends */
 	while ( true ) {
 	  const string chunk = client.read();
 	  if ( client.eof() ) { break; }
-	  cerr << "Got " << chunk.size() << " bytes from "
-	       << client.peer_address().to_string() << ": " << chunk;
+//	  count++;
+//  	  if (count % 10000 == 0 ) {
+////		cout << count << endl;
+////		cout << "I'm the server" << endl;
+//	  }
+	  //cerr << "Got " << chunk.size() << " bytes from "
+	  //     << client.peer_address().to_string() << ": " << chunk;
 	  client.write( "Received " + to_string( chunk.size() ) + " bytes from you.\n" );
 	}
 
