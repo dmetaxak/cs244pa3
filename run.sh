@@ -13,5 +13,5 @@ do
   echo ${DOWNLINKS[$i]}
   echo ${UPLINKS[$i]}
   # now run the protocol
-  ./sourdough/datagrump/run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 done

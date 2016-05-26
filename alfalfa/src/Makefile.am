@@ -1,1 +1,1 @@
-SUBDIRS = protobufs util crypto network sprout statesync examples 
+SUBDIRS = protobufs util crypto terminal network sprout statesync frontend examples tests

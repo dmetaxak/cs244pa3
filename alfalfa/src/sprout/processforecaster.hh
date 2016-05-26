@@ -2,7 +2,6 @@
 #define PROCESSFORECASTER_HH
 
 #include "process.hh"
-#include "sproutmath.pb.h"
 
 #include <vector>
 
@@ -33,10 +32,6 @@ public:
 			   const Process & example,
 			   const unsigned int tick_upper_limit,
 			   const unsigned int num_ticks );
-
-  ProcessForecastInterval( const Sprout::ProcessForecastInterval &storedmodel );
-
-  Sprout::ProcessForecastInterval to_protobuf( void ) const;
 
   double probability( const Process & ensemble, unsigned int count ) const;
 
