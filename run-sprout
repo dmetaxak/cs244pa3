@@ -38,15 +38,11 @@ push @command, q{$SPROUT_BT2 $MAHIMAHI_BASE 60001};
 # for the contest, we will send data over Verizon's downlink
 # (datagrump sender's uplink)
 die unless $command[ 3 ] eq "UPLINK";
-print STDERR "Down linkfile: $down_linkfile\n";
 $command[ 3 ] = qq{$tracedir/$down_linkfile};
 
-
-print STDERR "Up linkfile: $up_linkfile\n";
 die unless $command[ 4 ] eq "DOWNLINK";
 $command[ 4 ] = qq{$tracedir/$up_linkfile};
 
-# print @command;
 system @command;
 
 # kill the receiver (with a SIGKILL)
