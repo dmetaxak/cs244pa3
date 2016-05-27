@@ -9,7 +9,7 @@ source setup.sh
 #for i in `seq 0 4`;
 for i in `seq 0 0`;
 do
-
+  echo "SPROUT: ${DOWNLINKS[$i]} ${UPLINKS[$i]}"
   echo "SPROUT" 1>&2
   echo ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]} 1>&2
   ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
@@ -17,7 +17,10 @@ done
 
 for i in `seq 0 0`;
 do
+  echo "TCP VEGAS: ${DOWNLINKS[$i]} ${UPLINKS[$i]}"
   echo "TCP VEGAS" 1>&2
+  echo "Down linkfile: ${DOWNLINKS[$i]}" 1>&2
+  echo "Up linkfile: ${DOWNLINKS[$i]}" 1>&2
   sudo modprobe tcp_vegas
   sudo su <<EOF
   echo "vegas" > /proc/sys/net/ipv4/tcp_congestion_control
@@ -28,7 +31,10 @@ done
 
 for i in `seq 0 0`;
 do
+  echo "TCP CUBIC: ${DOWNLINKS[$i]} ${UPLINKS[$i]}"
   echo "TCP CUBIC" 1>&2
+  echo "Down linkfile: ${DOWNLINKS[$i]}" 1>&2
+  echo "Up linkfile: ${DOWNLINKS[$i]}" 1>&2
   sudo modprobe tcp_cubic
   sudo su <<EOF
  echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control

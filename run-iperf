@@ -51,7 +51,6 @@ $command[ 4 ] = qq{$tracedir/$up_linkfile};
 system @command;
 
 # kill the receiver
-kill 'INT', $receiver_pid;
 system "killall -s9 iperf";
 
 print "\n";
@@ -60,7 +59,7 @@ print "\n";
 system q{mm-throughput-graph 500 /tmp/contest_uplink_log > /dev/null}
   and die q{mm-throughput-graph exited with error. NOT uploading};
 
-print "\n";
-print qq{ done.\n\n};
-print "\n";
+print STDERR "\n";
+print STDERR qq{ done.\n\n};
+print STDERR "\n";
 
