@@ -4,12 +4,12 @@ use strict;
 use LWP::UserAgent;
 use HTTP::Request::Common;
 
-
 my $down_linkfile = $ARGV[ 0 ];
 my $up_linkfile = $ARGV[ 1 ];
-my $protocol = $ARGV[ 2 ];
-if ( not defined $down_linkfile or not defined $up_linkfile or not defined $protocol) {
-  die "Usage: $0 DOWN_LINKFILE UP_LINKFILE PROTOCOL\n";
+my $server = "iperf -s -p 60001";
+
+if ( not defined $down_linkfile or not defined $up_linkfile) {
+  die "Usage: $0 DOWN_LINKFILE UP_LINKFILE\n";
 }
 
 my $receiver_pid = fork;
@@ -18,7 +18,7 @@ if ( $receiver_pid < 0 ) {
   die qq{$!};
 } elsif ( $receiver_pid == 0 ) {
   # child
-  exec q{./receiver 9090} or die qq{$!};
+  exec q{iperf -s -p 60001} or die qq{$!};
 }
 
 chomp( my $prefix = qx{dirname `which mm-link`} );
@@ -34,26 +34,25 @@ my @command = qw{mm-delay 20 mm-link UPLINK DOWNLINK};
 
 push @command, qw{--once --uplink-log=/tmp/contest_uplink_log -- sh -c};
 
-push @command, q{./sender $MAHIMAHI_BASE 9090 false $protocol};
+push @command, q{iperf -c $MAHIMAHI_BASE -p 60001 -t 1200};
 
 # for the contest, we will send data over Verizon's downlink
 # (datagrump sender's uplink)
 die unless $command[ 3 ] eq "UPLINK";
-#$command[ 3 ] = qq{$tracedir/Verizon-LTE-short.down};
 # when there's a loop going through each trace, the above line will look like the below:
-print "Down linkfile: $down_linkfile\n";
+print STDERR "Down linkfile: $down_linkfile\n";
 $command[ 3 ] = qq{$tracedir/$down_linkfile};
 
 
-print "Up linkfile: $up_linkfile\n";
+print STDERR "Up linkfile: $up_linkfile\n";
 die unless $command[ 4 ] eq "DOWNLINK";
-#$command[ 4 ] = qq{$tracedir/Verizon-LTE-short.up};
 $command[ 4 ] = qq{$tracedir/$up_linkfile};
 
 system @command;
 
 # kill the receiver
 kill 'INT', $receiver_pid;
+system "killall -s9 iperf";
 
 print "\n";
 
