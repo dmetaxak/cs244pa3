@@ -10,29 +10,33 @@ UPLINKS=("Verizon-LTE-short.up" "ATT-LTE-driving.up" "TMobile-UMTS-driving.up" "
 MYNAME=`whoami`
 echo $MYNAME
 
-source setup.sh 
+source setup.sh
 
 #for i in `seq 0 4`;
 for i in `seq 0 0`;
 do
-  echo $i
+
   echo ${DOWNLINKS[$i]}
   echo ${UPLINKS[$i]}
-  # now run the protocol
-  sudo -u ubuntu echo ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
-  sudo -u ubuntu ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 
-  modprobe tcp_vegas
-  echo "vegas" > /proc/sys/net/ipv4/tcp_congestion_control
 
-  sudo -u ubuntu echo ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
-  sudo -u ubuntu ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  echo "SPROUT"
+  echo ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  ./run-sprout ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 
-  modprobe -r tcp_vegas
-  modprobe tcp_cubic
-#  sudo su -
- # echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
- # logout
- # echo ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
-  
+#  echo "TCP VEGAS"
+#  sudo modprobe tcp_vegas
+#  sudo su <<EOF
+#  echo "vegas" > /proc/sys/net/ipv4/tcp_congestion_control
+#EOF
+#  echo ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+#  ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+
+  echo "TCP CUBIC"
+  sudo modprobe tcp_cubic
+  sudo su <<EOF
+ echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
+EOF
+  echo ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 done
