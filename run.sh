@@ -26,7 +26,7 @@ do
   sudo su <<EOF
   echo "vegas" > /proc/sys/net/ipv4/tcp_congestion_control
 EOF
-  ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  ./run-iperf ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 done
 
 for i in `seq 0 0`;
@@ -39,5 +39,32 @@ do
   sudo su <<EOF
  echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
 EOF
-  ./run-tcp ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+  ./run-iperf ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+done
+
+for i in `seq 0 0`;
+do
+  echo "TCP HYBLA: ${DOWNLINKS[$i]} ${UPLINKS[$i]}"
+  echo "TCP HYBLA" 1>&2
+  echo "Down linkfile: ${DOWNLINKS[$i]}" 1>&2
+  echo "Up linkfile: ${UPLINKS[$i]}" 1>&2
+  sudo modprobe tcp_hybla
+  sudo su <<EOF
+ echo "hybla" > /proc/sys/net/ipv4/tcp_congestion_control                                                                                             
+EOF
+./run-iperf ${DOWNLINKS[$i]} ${UPLINKS[$i]}
+done
+
+
+for i in `seq 0 0`;
+do
+  echo "TCP BIC: ${DOWNLINKS[$i]} ${UPLINKS[$i]}"
+  echo "TCP BIC" 1>&2
+  echo "Down linkfile: ${DOWNLINKS[$i]}" 1>&2
+  echo "Up linkfile: ${UPLINKS[$i]}" 1>&2
+  sudo modprobe tcp_bic
+  sudo su <<EOF
+ echo "bic" > /proc/sys/net/ipv4/tcp_congestion_control                                                                                             
+EOF
+./run-iperf ${DOWNLINKS[$i]} ${UPLINKS[$i]}
 done
