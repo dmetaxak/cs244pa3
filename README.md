@@ -1,19 +1,39 @@
 # cs244pa3
 
-Setup
-=====
+Running Sprout on mahimahi
+==========================
+
+0. Install things
+
+1. Run things
+
+`$ ./inception.sh`
+
+This will take approximately 5 hrs and will produce two output files: `out.txt` (the raw log) and `out.tsv` (the nicely formatted output)
+
+If you want to produce graphs with matplotlib:
+
+`$ python make_graphs.py out.tsv <PREFIX>`
+
+This will produce one graph for each trace that was run (5 in total) in the format `PREFIX_TRACE.png`
 
 
-1. setup the (slightly modified) CS 244 PA 2 contest code
+Installation
+============
+
+0. Clone this repo
+
+1. Install mahimahi
+
 `
 $ sudo apt-get install build-essential git debhelper autotools-dev dh-autoreconf iptables protobuf-compiler libprotobuf-dev pkg-config libssl-dev dnsmasq-base ssl-cert libxcb-present-dev libcairo2-dev libpango1.0-dev iproute2 apache2-dev apache2-bin iptables dnsmasq-base gnuplot iproute2 apache2-api-20120211 libwww-perl` (these dependencies are listed in mahimahi/debian/control, plus some for the contest itself)
-`$ cd sourdough` 
-`$ ./autogen.sh && ./configure && make` (compile the contest code the usual way)
-`$ sudo sysctl -w net.ipv4.ip_forward=1` (have to enable Linux's IP forwarding for mahimahi to work)
 `
+To check if mahimahi is running, try:
 
+`$ mm-delay 20`
+`$ exit`
 
-2. you need to setup sprout stuff:
+2. Build Sprout
 
 `$ cd alfalfa`
 `$ ./autogen.sh`
@@ -22,9 +42,8 @@ $ sudo apt-get install build-essential git debhelper autotools-dev dh-autoreconf
 
 This will likely require that you install some things along the way. If you get any errors of someting not being found when you try to `make`, install those packages using `apt-get`.
 
-3. Setup environment variables (from the main project folder)
+3. Install iperf
 
-`$ cd ..`
-`$ source setup.sh`
+4. (For graphing the results) install matplotlib
 
-4. Now you can run things (hopefully)!
+`$ sudo apt-get install python-matplotlib`

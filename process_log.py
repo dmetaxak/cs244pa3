@@ -16,7 +16,7 @@ delay = None
 avg_capacity = None
 for line in infile:
   l = line.strip()
-  if l in ['SPROUT', 'TCP VEGAS', 'TCP CUBIC']:
+  if l in ['SPROUT', 'TCP VEGAS', 'TCP CUBIC', 'TCP HYBLA', 'TCP BIC']:
     if not protocol is None:
       results.append((protocol, downlink, uplink, throughput, delay, avg_capacity))
       protocol = None
@@ -46,6 +46,5 @@ outfile.write('protocol\tdownlink\tuplink\tthroughput\tdelay\tavg_capacity\n')
 for result in results:
   print result
   outfile.write('\t'.join(result))
+  outfile.write('\n')
 outfile.close()
-
-# now make pretty graphs
