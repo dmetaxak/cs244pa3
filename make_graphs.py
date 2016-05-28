@@ -10,7 +10,10 @@ def make_graph(data, title, save):
 
   count = 0
   for label, x, y in data:
-    plt.plot(x, y, markers[count % len(markers)], label = label)
+    ms = 20
+    if label == 'SPROUT':
+      ms = 30
+    plt.plot(x, y, markers[count % len(markers)], label = label, ms = ms)
     count += 1
     #ax.annotate('%s' % label, xy=(x, y), textcoords='data')
   ax.set_xscale('log')
