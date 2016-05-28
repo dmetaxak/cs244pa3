@@ -18,7 +18,7 @@ def make_graph(data, title, save):
   plt.title(title)
   plt.xlabel('95th percentile signal delay (ms)')
   plt.ylabel('Throughput (Mb/s)')
-  plt.legend()
+  plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
   plt.ylim(0)
   print 'Saving: %s' % save
   plt.savefig(save, bbox_inches='tight')
